@@ -1,0 +1,128 @@
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm farm-navbar">
+    <div class="container">
+      <a class="navbar-brand fw-bold text-success" href="/home">🚜 FarmLink</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/home/guide">How It Works</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/home/listings/new">Add Machinery</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/home/testimonials">Testimonials</a>
+          </li>
+        </ul>
+        <div class="ms-lg-3">
+            <%if(!currUser) {%>
+                <a href="/login" class="btn btn-outline-primary me-2">Log In</a>
+                <a href="/signup" class="btn btn-primary">Sign Up</a>
+            <% } %>
+            <% if(currUser) { %>
+                <a href="/logout" class="btn btn-danger">Log Out</a>
+            <% } %>
+        </div>
+      </div>
+    </div>
+  </nav>
+  
+  <!-- Custom Styling -->
+  <style>
+    /* Navbar Base */
+   
+  
+    .farm-navbar .navbar-brand {
+      font-size: 1.6rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+  
+    .farm-navbar .navbar-brand:hover {
+      color: #2e7d32 !important;
+      text-shadow: 0 2px 6px rgba(76, 175, 79, 0.381);
+    }
+  
+    /* Nav Links */
+    .farm-navbar .nav-link {
+      color: #2e7d32 !important;
+      font-weight: 500;
+      position: relative;
+      margin: 0 8px;
+      transition: color 0.3s ease;
+    }
+  
+    .farm-navbar .nav-link.active {
+      color: #1b5e20 !important;
+      font-weight: 600;
+    }
+  
+    .farm-navbar .nav-link::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background-color: #43a047;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+  
+    .farm-navbar .nav-link:hover {
+      color: #1b5e20 !important;
+    }
+  
+    .farm-navbar .nav-link:hover::after {
+      width: 60%;
+    }
+  
+    /* Buttons */
+    .farm-navbar .btn {
+      font-weight: 500;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+  
+    .farm-navbar .btn-outline-primary {
+      color: #388e3c;
+      border-color: #388e3c;
+    }
+  
+    .farm-navbar .btn-outline-primary:hover {
+      background-color: #388e3c;
+      color: white;
+      transform: translateY(-1px);
+    }
+  
+    .farm-navbar .btn-primary {
+      background-color: #4caf50;
+      border: none;
+    }
+  
+    .farm-navbar .btn-primary:hover {
+      background-color: #388e3c;
+      transform: translateY(-1px);
+    }
+  
+    /* Mobile Adjustments */
+    @media (max-width: 991px) {
+      .farm-navbar .nav-link {
+        margin: 8px 0;
+        text-align: center;
+      }
+      .farm-navbar .btn {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  </style>
+  

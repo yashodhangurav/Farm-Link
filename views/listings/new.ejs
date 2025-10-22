@@ -1,0 +1,137 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<body>
+    <!-- style -->
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background: #f9fafb;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+        }
+    
+        form {
+          background: white;
+          padding: 2rem;
+          border-radius: 10px;
+          box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+          width: 600px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-left: 30%;
+        }
+    
+        h2 {
+          text-align: center;
+          margin-bottom: 1rem;
+          color: #2b7a0b;
+        }
+    
+        label {
+          display: block;
+          margin: 0.5rem 0 0.2rem;
+          font-weight: bold;
+          font-size: 0.9rem;
+        }
+    
+        input, textarea, select {
+          width: 100%;
+          padding: 0.5rem;
+          margin-bottom: 1rem;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          font-size: 0.9rem;
+        }
+    
+        button {
+          width: 100%;
+          background: #2b7a0b;
+          color: white;
+          padding: 0.7rem;
+          border: none;
+          border-radius: 6px;
+          font-size: 1rem;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+    
+        button:hover {
+          background: #256508;
+        }
+      </style>
+
+      <!-- form -->
+
+    <form action="/home/listings" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
+        <h2>Add New Machinery</h2>
+
+    <div>
+      <label for="title">Title</label>
+      <input type="text" id="title" name="listing[title]" placeholder="Enter machinery name" class="form-control" required />
+      <div class="invalid-feedback">
+        Please enter a Title.
+      </div>
+    </div>
+        
+    <div>
+      <label for="type">Type</label>
+      <select id="type" name="listing[type]" class="form-control" required>
+        <option value="">Select Type</option>
+        <option value="tractor">Tractor</option>
+        <option value="harvester">Harvester</option>
+        <option value="sprayer">Sprayer</option>
+        <option value="plough">Plough</option>
+        <option value="seeder">Seeder</option>
+        <option value="irrigation">Irrigation</option>
+        <option value="other">Other</option>
+      </select>
+      <div class="invalid-feedback">
+        Please choose a Type.
+      </div>
+    </div>
+    
+    <div>
+      <label for="description">Description</label>
+      <textarea id="description" name="listing[description]" rows="3" placeholder="Brief about the equipment"  class="form-control" required></textarea>
+      <div class="invalid-feedback">
+        Please enter the Decription.
+      </div>
+    </div>
+    
+    <div>
+      <label for="pricePerDay">Price per Day (₹)</label>
+      <input  id="pricePerDay" name="listing[pricePerDay]" placeholder="Enter daily rent" class="form-control"  required />
+      <div class="invalid-feedback">
+        Please enter Price.
+      </div>
+    </div>
+    
+    <!-- <div>
+      <label for="imageUrl">Image URL</label>
+      <input type="text" id="imageUrl" name="listing[imageUrl]" placeholder="Paste image link" />
+    </div> -->
+    <div>
+      <label for="imageUrl">Upload Image</label>
+      <input type="file" id="imageUrl" name="listing[imageUrl]" required/>
+    </div>
+    
+    <div>
+      <label for="location">Location</label>
+      <input type="text" id="location" name="listing[location]" placeholder="e.g., Nashik"  class="form-control" required />
+      <div class="invalid-feedback">
+        Please enter Location.
+      </div>
+    </div>
+    
+    <div>
+      <label for="community">Community</label>
+      <input type="text" id="community" name="listing[community]" placeholder="e.g., River Valley Farmers" />
+    </div>
+  
+    <button type="submit">Add Listing</button>
+
+    </form>
+</body>

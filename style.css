@@ -1,0 +1,239 @@
+:root {
+    --primary-color: #2C5E1A; /* Deep Green */
+    --secondary-color: #F2A900 ; /* Sunny Yellow/Gold */
+    --light-gray: #f8f9fa ;
+    --dark-text: #343a40 ;
+}
+
+body {
+    font-family: 'Poppins', sans-serif !important;
+    color: var(--dark-text) !important;
+}
+
+/* --- Navigation --- */
+.navbar {
+    padding: 1rem 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    color: var(--primary-color);
+    font-size: 1.8rem;
+}
+
+.navbar-brand:hover {
+    color: #1e4212 ;
+}
+
+.nav-link {
+    font-weight: 600;
+    color: var(--dark-text);
+    transition: color 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--primary-color);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white ;
+}
+
+.btn-primary {
+    background-color: #2C5E1A !important;
+    border-color: #2C5E1A !important;
+    font-weight: 600;
+}
+.btn-primary:hover {
+    background-color: #1e4212 ;
+    border-color: #1e4212 ;
+}
+.btn-outline-primary{
+    color: #000000 !important;
+    border: 1px solid #2C5E1A !important;
+}
+.btn-outline-primary:hover {
+    background-color: #2C5E1A !important;
+    color: white !important;
+}
+
+/* --- Hero Section --- */
+
+#hero {
+   background-image: url('https://images.unsplash.com/photo-1507662228758-08d030c4820b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1932');
+    background-size: cover;
+    background-position: center;
+    padding: 120px 0;
+    text-align: center;
+}
+
+#hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+#hero p {
+    font-size: 1.25rem;
+    max-width: 600px;
+    margin: 1.5rem auto;
+}
+
+/* --- Sections --- */
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background-color: var(--secondary-color);
+    margin: 10px auto 0;
+}
+
+/* --- How It Works --- */
+.step-card {
+    text-align: center;
+    padding: 2rem;
+    border: none;
+    transition: transform 0.3s, box-shadow 0.3s;
+    background-color: #fff ;
+    border-radius: 15px;
+}
+
+.step-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.step-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background-color: #e8f5e9 ;
+    color: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+}
+
+/* --- Featured Listings --- */
+#listings {
+    background-color: var(--light-gray);
+}
+
+.listing-card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05) ;
+    transition: all 0.3s ease;
+}
+
+.listing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1) ;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.price-tag {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.location-tag {
+    color: #6c757d ;
+}
+
+/* --- Testimonials --- */
+.testimonial-card {
+    background-color: #fff ;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05) ;
+}
+
+.testimonial-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+.testimonial-card p {
+    font-style: italic;
+    color: #555 ;
+}
+
+.testimonial-author {
+    font-weight: 600;
+    margin-top: 1rem;
+    color: var(--primary-color);
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--dark-text);
+    color: white ;
+    padding: 60px 0 20px;
+}
+
+footer a {
+    color: var(--light-gray);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+footer a:hover {
+    color: var(--secondary-color);
+}
+
+.social-icons a {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: white ;
+}
+.footer-title {
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 1.5rem;
+}
+.footer-bottom {
+    border-top: 1px solid #495057 ;
+    padding-top: 20px;
+    margin-top: 40px;
+}
+.front-section{
+    padding: 5rem 0;
+   background-color: #ffffff9d;
+}

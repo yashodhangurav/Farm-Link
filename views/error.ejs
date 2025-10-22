@@ -1,0 +1,84 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<head>
+<style>
+
+body {
+  
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+  background-color: #f0f0f0; /* optional */
+}
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin: 1rem 0;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 2rem; /* optional */
+}
+
+
+    .error-code {
+      font-size: 6rem;
+      font-weight: 800;
+      color: #af4c4c;
+    }
+
+    .error-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #db2c2c;
+    }
+
+    .error-message {
+      color: #555;
+      margin: 1rem 0 2rem;
+      font-size: 1rem;
+    }
+
+    .btn-home {
+      background-color: #4caf50;
+      color: #fff;
+      font-weight: 500;
+      border-radius: 10px;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn-home:hover {
+      background-color: #2e7d32;
+      transform: translateY(-2px);
+    }
+
+    .error-image {
+      width: 100%;
+      max-width: 230px;
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+
+<div class="err-full-container">
+
+  <div class="error-container">
+    <img
+      src="https://cdn-icons-png.flaticon.com/512/6195/6195699.png"
+      alt="Error Illustration"
+      class="error-image" />
+
+    <div class="error-code"></div>
+    <div class="error-title"><p class="alert alert-danger"><%=message%></p></div>
+    <p class="error-message">
+
+    </p>
+
+    <a href="/home/listings" class="btn-home"> Go Back Home</a>
+  </div>
+
+</div>
+

@@ -1,0 +1,36 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+
+<body>
+
+<!-- Featured Listings Section -->
+<section id="listings" class="section-padding">
+    <div class="container">
+        <h2 class="section-title">Featured Listings</h2>
+        <div class="row g-4">
+            <!-- Listing 1 -->
+
+            <% for(listing of allListings) {%>
+
+            <div class="col-md-6 col-lg-4">
+                <div class="card listing-card">
+                    <img src="<%=listing.imageUrl.url%>" class="card-img-top" alt="Tractor">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold"><%=listing.title%></h5>
+                        <p class="location-tag mb-2"><%=listing.location%></p>
+                        <p class="price-tag">₹ <%=listing.pricePerDay.toLocaleString("en-IN")%> / day</p>
+                        <a href="/home/listings/<%=listing._id%>" class="btn btn-primary w-100 mt-3">View Details</a>
+                    </div>
+                </div>
+            </div>
+            
+            <%}%>
+
+
+        </div>
+    </div>
+</section>
+
+    
+    
+</body>

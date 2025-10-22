@@ -1,0 +1,123 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | FarmLink</title>
+
+
+
+  <style>
+    body {
+      background-color: #f4f8f3;
+     
+    }
+
+    .login-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      max-width: 600px;
+      margin: 5rem auto;
+    }
+
+    .form-control:focus {
+      border-color: #4caf50;
+      box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
+    }
+
+    .btn-success {
+      background-color: #4caf50;
+      border: none;
+    }
+
+    .btn-success:hover {
+      background-color: #388e3c;
+    }
+
+    .logo {
+      font-weight: 700;
+      color: #2e7d32;
+      font-size: 1.8rem;
+    }
+
+    .login-heading {
+      font-weight: 600;
+      color: #388e3c;
+    }
+
+    .text-muted small a {
+      color: #2e7d32;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .text-muted small a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="login-card">
+      <div class="text-center mb-4">
+        <i class="bi bi-leaf logo"></i>
+        <h3 class="login-heading mt-2">Welcome Back</h3>
+        <p class="text-muted">Login to continue exploring FarmLink</p>
+      </div>
+
+    
+      <!-- Login Form -->
+      <form action="/login" method="POST">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rememberMe" />
+            <label class="form-check-label" for="rememberMe">Remember me</label>
+          </div>
+          <a href="#" class="text-success small">Forgot password?</a>
+        </div>
+
+        <div class="d-grid mt-3">
+          <button type="submit" class="btn btn-success btn-lg">
+            <i class="bi bi-box-arrow-in-right"></i> Login
+          </button>
+        </div>
+
+        <div class="text-center text-muted mt-3">
+          <small>Don’t have an account? <a href="/signup">Sign up</a></small>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
+</body>
+</html>
