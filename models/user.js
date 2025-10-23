@@ -19,7 +19,7 @@ const userSchema = new Schema({
     phone: {
       type: String,
       trim: true,
-      // match: [/^[0-9]{10}$/, "Please provide a valid 10-digit phone number"],
+      match: [/^[0-9]{10}$/, "Please provide a valid 10-digit phone number"],
     },
   
     community: {

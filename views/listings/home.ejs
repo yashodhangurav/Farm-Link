@@ -1,23 +1,138 @@
-
 <% layout("/layouts/boilerplate.ejs") %>
 
 <body>
-    <!-- Hero Section -->
-    <header id="hero">
-        <div class="container front-section">
-            <div class="row">
-                <div class="col-12">
-                    <h1>Share the Power, Harvest the Future.</h1>
-                    <p class="lead">The digital marketplace for farmers to rent and share agricultural machinery. Save money, increase efficiency, and build a stronger community.</p>
-                    <form method="get", action="/home/listings">
-                        <button class="btn btn-primary btn-lg">
-                            Browse Available Machinary
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </header>
 
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-container">
+      <div class="hero-text">
+        <h1>Empowering Farmers, One Machine at a Time</h1>
+        <p>
+          Discover a smarter way to share and rent agricultural machinery.
+          Save money, boost productivity, and build a stronger farming community.
+        </p>
+        <form method="get" action="/home/listings">
+          <button class="hero-btn">Browse Machinery</button>
+        </form>
+      </div>
+      <div class="hero-image">
+        <img
+          src="https://plus.unsplash.com/premium_photo-1661842511565-144418958d6c?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1172"
+          alt="Agricultural machinery" />
+      </div>
+    </div>
+  </section>
 
+  <!-- Styles -->
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      /* font-family: 'Poppins', sans-serif;
+      background-color: #f8fafc;
+      color: #1a202c;
+      overflow-x: hidden; */
+    }
+
+    /* Hero Section */
+    #hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 90vh;
+      background: linear-gradient(135deg, #e6f4ea 0%, #ffffff 100%);
+      padding: 2rem 8%;
+    }
+
+    .hero-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+      max-width: 1200px;
+    }
+
+    .hero-text {
+      flex: 1 1 45%;
+    }
+
+    .hero-text h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: #1a202c;
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #4a5568;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+
+    .hero-btn {
+      background-color: #2b7a0b;
+      color: white;
+      border: none;
+      padding: 0.9rem 2rem;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(43, 122, 11, 0.25);
+    }
+
+    .hero-btn:hover {
+      background-color: #256508;
+      transform: translateY(-2px);
+    }
+
+    .hero-image {
+      flex: 1 1 50%;
+      text-align: center;
+    }
+
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+  
+
+    /* Mobile screens */
+    @media (max-width: 600px) {
+      #hero {
+        padding: 2rem 1.5rem;
+      }
+
+      .hero-text h1 {
+        font-size: 1.9rem;
+        line-height: 1.4;
+      }
+
+      .hero-text p {
+        font-size: 0.95rem;
+      }
+
+      .hero-btn {
+        width: 100%;
+        padding: 0.9rem;
+        font-size: 1rem;
+      }
+
+      .hero-image img {
+        width: 100%;
+        border-radius: 12px;
+      }
+    }
+  </style>
 </body>

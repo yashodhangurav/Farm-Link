@@ -47,7 +47,6 @@
         }
     
         button {
-          width: 100%;
           background: #2b7a0b;
           color: white;
           padding: 0.7rem;
@@ -60,6 +59,47 @@
     
         button:hover {
           background: #256508;
+        }
+        /* RESPONSIVE DESIGN FOR MOBILE DEVICES */
+        @media (max-width: 768px) {
+          form {
+            width: 90%;
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+          }
+
+          h2 {
+            font-size: 1.3rem;
+          }
+
+          input, textarea, select {
+            font-size: 1rem;
+            padding: 0.6rem;
+          }
+
+          button {
+            font-size: 1rem;
+            padding: 0.8rem;
+          }
+        }
+
+        @media (max-width: 480px) {
+          form {
+            width: 95%;
+            padding: 1.2rem;
+          }
+
+          h2 {
+            font-size: 1.1rem;
+          }
+
+          label {
+            font-size: 0.85rem;
+          }
+
+          button {
+            font-size: 0.95rem;
+          }
         }
       </style>
 

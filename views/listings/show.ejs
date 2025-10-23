@@ -77,16 +77,24 @@
                         </div>
 
                         <div class="mt-3 mt-md-0">
-                          <button class="btn btn-outline-primary me-2">
+                          <!-- WhatsApp Message Button -->
+                          <a 
+                            href="https://wa.me/<%=listing.owner.phone%>" 
+                            target="_blank" 
+                            class="btn btn-outline-primary me-2"
+                          >
                             <i class="bi bi-chat-dots"></i> Message Owner
-                          </button>
-                          <button class="btn btn-success">
+                          </a>
+                        
+                          <!-- Direct Call Button -->
+                          <a 
+                            href="tel:+91<%=listing.owner.phone%>" 
+                            class="btn btn-success"
+                          >
                             <i class="bi bi-telephone"></i> Contact Owner
-                          </button>
+                          </a>
                         </div>
-                      </div>
-                    </div>
-
+                        
                     <!-- Owner Options -->
                     
                     <div class="owner-btn mt-4 d-flex">

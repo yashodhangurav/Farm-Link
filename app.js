@@ -3,6 +3,9 @@ if(process.env.NODE_ENV != "production"){  //by this we can access environmental
 };
 
 
+
+
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -11,6 +14,7 @@ const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
 const expressError = require("./utils/expressError.js");
 
+// app.use('/logo', express.static('/logo'));
 
 // routers requiring
 const listingRouter = require("./routes/listing.js");
