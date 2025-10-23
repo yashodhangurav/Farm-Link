@@ -81,7 +81,7 @@
                           <a 
                             href="https://wa.me/<%=listing.owner.phone%>" 
                             target="_blank" 
-                            class="btn btn-outline-primary me-2"
+                            class="btn btn-outline-primary btn-sm me-2 "
                           >
                             <i class="bi bi-chat-dots"></i> Message Owner
                           </a>
@@ -89,9 +89,9 @@
                           <!-- Direct Call Button -->
                           <a 
                             href="tel:+91<%=listing.owner.phone%>" 
-                            class="btn btn-success"
+                            class="btn btn-success btn-sm me-2 "
                           >
-                            <i class="bi bi-telephone"></i> Contact Owner
+                            <i class="bi bi-telephone "></i> Contact Owner
                           </a>
                         </div>
                         
@@ -117,12 +117,12 @@
 
         </div>
       </div>
-
+    </div>
       <hr>
 
       <!------------------------------------------- Review Section--------------------------------------- -->
-      <div class="container col-6">
-        <div class="card shadow-sm border-0 p-4">
+      <div class="container ">
+        <div class="card shadow-sm border-0 p-4 ">
           <h4 class="mb-4 text-success fw-bold">🌾 Reviews & Feedback</h4>
 
           <!-- Review Form -->
@@ -191,6 +191,7 @@
            <% } %>
           
         </div>
+      
         <br>
         <!-- submitted reviews -->
         <% if (listing.reviews && listing.reviews.length> 0) { %>
@@ -237,7 +238,7 @@
             <% } %>
 
       </div>
-
+</div>
 
 
     </body>
