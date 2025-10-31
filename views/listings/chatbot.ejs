@@ -1,0 +1,566 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FarmLink - Equipment Sharing Assistant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #2d5016 0%, #5a8f29 100%);
+            min-height: 100vh;
+            align-items: center;
+        
+        }
+        .chatbot-main-container{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 1rem 0 1rem 0;
+        }
+
+        .chatbot-container {
+            width: 100%;
+            max-width: 450px;
+            height: 700px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, #4a7c1f 0%, #6ba832 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .chatbot-header h1 {
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .chatbot-header p {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            background: #7cff63;
+            border-radius: 50%;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+            max-width: 85%;
+        }
+
+        .message.user {
+            align-self: flex-end;
+        }
+
+        .message.bot {
+            align-self: flex-start;
+        }
+
+        .message-content {
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.95em;
+            line-height: 1.4;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .message.user .message-content {
+            background: #4a7c1f;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message.bot .message-content {
+            background: white;
+            color: #333;
+            border: 1px solid #e1e5e9;
+            border-bottom-left-radius: 4px;
+        }
+
+        .bot-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #4a7c1f;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            font-weight: bold;
+            font-size: 0.8em;
+        }
+
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: white;
+            border: 1px solid #e1e5e9;
+            border-radius: 18px;
+            border-bottom-left-radius: 4px;
+            max-width: 70%;
+            align-self: flex-start;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing-bounce 1.4s infinite ease-in-out;
+        }
+
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes typing-bounce {
+            0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        .chat-input-container {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e1e5e9;
+        }
+
+        .chat-input-wrapper {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+
+        #chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 1px solid #e1e5e9;
+            border-radius: 25px;
+            outline: none;
+            font-size: 0.95em;
+            resize: none;
+            max-height: 100px;
+            min-height: 20px;
+            line-height: 1.4;
+            transition: border-color 0.3s;
+        }
+
+        #chat-input:focus {
+            border-color: #4a7c1f;
+        }
+
+        #send-button {
+            background: #4a7c1f;
+            color: white;
+            border: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #send-button:hover {
+            background: #3a6417;
+            transform: scale(1.05);
+        }
+
+        #send-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .send-icon {
+            width: 20px;
+            height: 20px;
+        }
+
+        .suggestions {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .suggestion-chip {
+            background: #f1f3f4;
+            border: 1px solid #e1e5e9;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-chip:hover {
+            background: #4a7c1f;
+            color: white;
+        }
+
+        .equipment-category {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .category-chip {
+            background: #e8f5e9;
+            border: 1px solid #4a7c1f;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #2d5016;
+        }
+
+        .category-chip:hover {
+            background: #4a7c1f;
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .chatbot-container {
+                height: 100vh;
+                max-width: none;
+                border-radius: 0;
+            }
+            
+            body {
+                padding: 0;
+            }
+        }
+
+        .message-time {
+            font-size: 0.7em;
+            opacity: 0.6;
+            margin-top: 5px;
+            text-align: right;
+        }
+
+        .bot-message-wrapper {
+            display: flex;
+            align-items: flex-start;
+        }
+    </style>
+</head>
+<body>
+    <div class="chatbot-main-container">
+
+        <div class="chatbot-container">
+            <div class="chatbot-header">
+                <div class="status-indicator"></div>
+                <h1>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                    </svg>
+                    FarmLink Assistant
+                </h1>
+                <p>Your farming equipment sharing platform</p>
+            </div>
+            
+            <div class="chat-messages" id="chat-messages">
+                <!-- Messages will be inserted here by JavaScript -->
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="suggestions">
+                    <div class="suggestion-chip" data-prompt="How do I list my equipment?">List Equipment</div>
+                    <div class="suggestion-chip" data-prompt="What equipment is available?">Find Equipment</div>
+                    <div class="suggestion-chip" data-prompt="How does payment work?">Payment Info</div>
+                </div>
+                
+                <div class="equipment-category">
+                    <div class="category-chip" data-prompt="Tell me about tractor rentals">Tractors</div>
+                    <div class="category-chip" data-prompt="What harvesting equipment is available?">Harvesting</div>
+                    <div class="category-chip" data-prompt="Show me irrigation equipment">Irrigation</div>
+                    <div class="category-chip" data-prompt="I need planting equipment">Planting</div>
+                </div>
+                
+                <div class="chat-input-wrapper">
+                    <textarea 
+                        id="chat-input" 
+                        placeholder="Ask about equipment rentals, listings, or platform help..." 
+                        rows="1"
+                    ></textarea>
+                    <button id="send-button">
+                        <svg class="send-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+        <script>
+            class FarmLinkChatbot {
+                constructor() {
+                    this.messages = [];
+                    this.isProcessing = false;
+                    this.initializeElements();
+                    this.setupEventListeners();
+                    this.addWelcomeMessage();
+                }
+    
+                initializeElements() {
+                    this.chatMessages = document.getElementById('chat-messages');
+                    this.chatInput = document.getElementById('chat-input');
+                    this.sendButton = document.getElementById('send-button');
+                    this.typingIndicator = this.createTypingIndicator();
+                }
+    
+                createTypingIndicator() {
+                    const indicator = document.createElement('div');
+                    indicator.className = 'typing-indicator';
+                    const dots = document.createElement('div');
+                    dots.className = 'typing-dots';
+                    dots.innerHTML = `
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                        <div class="typing-dot"></div>
+                    `;
+                    indicator.appendChild(dots);
+                    return indicator;
+                }
+    
+                setupEventListeners() {
+                    this.sendButton.addEventListener('click', () => this.sendMessage());
+                    
+                    this.chatInput.addEventListener('keypress', (e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                            e.preventDefault();
+                            this.sendMessage();
+                        }
+                    });
+    
+                    this.chatInput.addEventListener('input', () => {
+                        this.autoResizeTextarea();
+                    });
+    
+                    // Suggestion chips
+                    document.querySelectorAll('.suggestion-chip').forEach(chip => {
+                        chip.addEventListener('click', () => {
+                            const prompt = chip.getAttribute('data-prompt');
+                            this.chatInput.value = prompt;
+                            this.sendMessage();
+                        });
+                    });
+    
+                    // Category chips
+                    document.querySelectorAll('.category-chip').forEach(chip => {
+                        chip.addEventListener('click', () => {
+                            const prompt = chip.getAttribute('data-prompt');
+                            this.chatInput.value = prompt;
+                            this.sendMessage();
+                        });
+                    });
+                }
+    
+                autoResizeTextarea() {
+                    this.chatInput.style.height = 'auto';
+                    this.chatInput.style.height = Math.min(this.chatInput.scrollHeight, 100) + 'px';
+                }
+    
+                addWelcomeMessage() {
+                    const welcomeMessage = "Hello! I'm your FarmLink assistant. I can help you find farming equipment to rent, list your equipment for others to use, answer questions about our platform, and assist with rental processes. How can I help you today?";
+                    this.addMessage(welcomeMessage, 'bot');
+                }
+    
+                async sendMessage() {
+                    const message = this.chatInput.value.trim();
+                    
+                    if (!message || this.isProcessing) return;
+    
+                    // Add user message
+                    this.addMessage(message, 'user');
+                    this.chatInput.value = '';
+                    this.autoResizeTextarea();
+                    
+                    // Show typing indicator
+                    this.showTypingIndicator();
+                    
+                    try {
+                        this.isProcessing = true;
+                        this.sendButton.disabled = true;
+                        
+                        // Get AI response
+                        const response = await this.getAIResponse(message);
+                        
+                        // Remove typing indicator and add bot response
+                        this.hideTypingIndicator();
+                        this.addMessage(response, 'bot');
+                        
+                    } catch (error) {
+                        console.error('Error:', error);
+                        this.hideTypingIndicator();
+                        this.addMessage("I apologize, but I'm having trouble responding right now. Please try again later or contact our support team.", 'bot');
+                    } finally {
+                        this.isProcessing = false;
+                        this.sendButton.disabled = false;
+                        this.chatInput.focus();
+                    }
+                }
+    
+                async getAIResponse(userMessage) {
+                    // For demonstration, using a mock API response
+                    // In production, replace this with actual OpenAI API call
+                    
+                    // Mock API delay
+                    await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+                    
+                    const lowerMessage = userMessage.toLowerCase();
+                    
+                    // Equipment categories
+                    if (lowerMessage.includes('tractor')) {
+                        return "We have various tractors available for rent, including compact utility tractors (25-50 HP), utility tractors (50-100 HP), and row-crop tractors (100+ HP). Rental prices typically range from $150-$500 per day depending on size and features. Would you like to see available tractors in your area?";
+                    } else if (lowerMessage.includes('harvest') || lowerMessage.includes('combine')) {
+                        return "Our harvesting equipment includes combines, forage harvesters, and cotton pickers. Combine harvesters are our most popular rental item during harvest season. Daily rates range from $800-$1500. Many owners offer weekly discounts. Would you like to check availability for specific dates?";
+                    } else if (lowerMessage.includes('irrigation') || lowerMessage.includes('water')) {
+                        return "We have various irrigation equipment including center pivot systems, drip irrigation kits, and portable sprinklers. Rental costs depend on the system size and duration, typically $50-$300 per day. Many irrigation owners also offer installation services for an additional fee.";
+                    } else if (lowerMessage.includes('planting') || lowerMessage.includes('seed')) {
+                        return "Planting equipment available includes seed drills, planters, and transplanters. Planter rentals range from $200-$600 per day depending on row count and technology features. Would you like information about specific planting equipment?";
+                    
+                    // Platform functionality
+                    } else if (lowerMessage.includes('list') || lowerMessage.includes('add equipment')) {
+                        return "To list your equipment: 1) Go to 'My Equipment' in your account, 2) Click 'Add New Equipment', 3) Fill in details (photos, specs, availability), 4) Set your rental price and terms, 5) Publish your listing. We recommend including clear photos and detailed specifications to attract more renters.";
+                    } else if (lowerMessage.includes('find') || lowerMessage.includes('available') || lowerMessage.includes('search')) {
+                        return "You can search for equipment by category, location, or specific equipment type. Use our map view to find equipment near your farm. You can filter by price, availability dates, and equipment specifications. Would you like help searching for specific equipment?";
+                    } else if (lowerMessage.includes('payment') || lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                        return "FarmLink handles payments securely through our platform. Renters pay when booking, and owners receive payment 24 hours after equipment return (minus our 15% service fee). We offer damage protection options starting at 5% of the rental cost. All major credit cards are accepted.";
+                    } else if (lowerMessage.includes('insurance') || lowerMessage.includes('damage')) {
+                        return "We offer optional damage protection that covers up to $5000 in accidental damage for 5% of the rental cost. For high-value equipment, we recommend our premium protection (10% of rental cost) which covers up to $25,000. Owners can also require renters to provide proof of insurance.";
+                    } else if (lowerMessage.includes('delivery') || lowerMessage.includes('transport')) {
+                        return "Many equipment owners offer delivery services for an additional fee (typically $2-5 per mile). You can filter search results to show only equipment with delivery options. For large equipment, we recommend discussing transport arrangements with the owner before booking.";
+                    } else if (lowerMessage.includes('cancel') || lowerMessage.includes('refund')) {
+                        return "Cancellation policies vary by owner. Most offer full refunds for cancellations made at least 7 days before the rental period. Cancellations within 48 hours typically receive a 50% refund. Please check the specific cancellation policy for each equipment listing before booking.";
+                    
+                    // General responses
+                    } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                        return "Hello! Welcome to FarmLink. I'm here to help you with equipment rentals, listings, or any questions about our platform. How can I assist you today?";
+                    } else if (lowerMessage.includes('thank')) {
+                        return "You're welcome! Is there anything else I can help you with regarding equipment rentals or our platform?";
+                    } else {
+                        return "I understand you're asking about farming equipment sharing. At FarmLink, we connect equipment owners with farmers who need to rent machinery. I can help you find equipment to rent, list your equipment, or answer questions about our rental process. Could you please provide more specific details about what you need?";
+                    }
+                }
+    
+                addMessage(content, sender) {
+                    const messageDiv = document.createElement('div');
+                    messageDiv.className = `message ${sender}`;
+                    
+                    if (sender === 'bot') {
+                        const wrapperDiv = document.createElement('div');
+                        wrapperDiv.className = 'bot-message-wrapper';
+                        
+                        const avatarDiv = document.createElement('div');
+                        avatarDiv.className = 'bot-avatar';
+                        avatarDiv.textContent = 'FL';
+                        
+                        const contentDiv = document.createElement('div');
+                        contentDiv.className = 'message-content';
+                        contentDiv.textContent = content;
+                        
+                        wrapperDiv.appendChild(avatarDiv);
+                        wrapperDiv.appendChild(contentDiv);
+                        messageDiv.appendChild(wrapperDiv);
+                    } else {
+                        const contentDiv = document.createElement('div');
+                        contentDiv.className = 'message-content';
+                        contentDiv.textContent = content;
+                        
+                        const timeDiv = document.createElement('div');
+                        timeDiv.className = 'message-time';
+                        timeDiv.textContent = this.getCurrentTime();
+                        
+                        messageDiv.appendChild(contentDiv);
+                        messageDiv.appendChild(timeDiv);
+                    }
+                    
+                    this.chatMessages.appendChild(messageDiv);
+                    
+                    // Scroll to bottom
+                    this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                    
+                    // Store message in history
+                    this.messages.push({ sender, content, timestamp: new Date() });
+                }
+    
+                getCurrentTime() {
+                    const now = new Date();
+                    return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                }
+    
+                showTypingIndicator() {
+                    this.chatMessages.appendChild(this.typingIndicator);
+                    this.typingIndicator.style.display = 'block';
+                    this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                }
+    
+                hideTypingIndicator() {
+                    this.typingIndicator.style.display = 'none';
+                }
+            }
+    
+            // Initialize chatbot when page loads
+            document.addEventListener('DOMContentLoaded', () => {
+                new FarmLinkChatbot();
+            });
+        </script>
+    </div>
+    
+</body>
+</html>

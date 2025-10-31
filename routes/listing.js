@@ -30,6 +30,8 @@ router.get("/testimonials", listingController.testimonial );
 // New route
 router.get("/listings/new", isLoggedIn, listingController.new )
 
+//   chatbot route-------------------------------------------------------------------------------chatbot
+router.get("/chatbot", listingController.chatbot );
 
 // show route
 router
@@ -43,7 +45,6 @@ router.post("/listings",
     validateListing, //joivalidation
     wrapAsync(listingController.createListing));
 
-  
 
 
 
@@ -68,6 +69,8 @@ router.delete("/listings/:id",
     isLoggedIn,
     isOwner, 
     wrapAsync(listingController.delete));
+    
 
+   
 
 module.exports = router;

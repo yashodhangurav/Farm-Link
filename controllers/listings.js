@@ -85,3 +85,8 @@ module.exports.delete = async(req,res)=>{
     req.flash("success", "Listing Deleted !"); //flash
     res.redirect("/home/listings");
 };
+
+
+module.exports.chatbot = (req,res)=>{
+    res.render("listings/chatbot.ejs")
+};
