@@ -38,7 +38,7 @@ Whether you're a farmer trying to sell produce or a buyer looking for fresh good
 
 * Works across mobile, tablet, and desktop
 
-🔐 **User Authentication** (if added)
+🔐 **User Authentication** 
 
 * Login & Signup for both farmers and buyers
 
@@ -53,12 +53,11 @@ Whether you're a farmer trying to sell produce or a buyer looking for fresh good
 
 | Layer          | Technologies                                                 |
 | -------------- | ------------------------------------------------------------ |
-| **Frontend**   | HTML, CSS, JavaScript *(Update if you used Bootstrap/React)* |
-| **Backend**    | Node.js / PHP / Django *(Choose your actual backend)*        |
+| **Frontend**   | HTML, CSS, JavaScript |
+| **Backend**    | Node.js / Express.js / MVC framwork                          |
 | **Database**   | MongoDB / MySQL / Firebase                                   |
-| **Deployment** | GitHub Pages / Netlify / Vercel                              |
+| **Deployment** | GitHub Pages / Render                                        |
 
-> Want me to auto-generate a tech stack diagram? I can!
 
 ---
 
@@ -111,11 +110,10 @@ npm start
 
 ## 📸 **Screenshots**
 
-(Add your screenshots in a folder and update the paths.)
 
 ```
-![Home Page](./assets/images/home.png)
-![Products](./assets/images/products.png)
+![Home Page](./assets/screenshots/Screenshot(80).png)
+![Products](./assets/screenshots/Screenshot(81).png)
 ```
 
 ---
@@ -125,7 +123,7 @@ npm start
 **Yashodhan Gurav**
 🔗 GitHub: [@yashodhangurav](https://github.com/yashodhangurav)
 
-(Add LinkedIn link if you want)
+(www.linkedin.com/in/yashodhangurav)
 
 ---
 
